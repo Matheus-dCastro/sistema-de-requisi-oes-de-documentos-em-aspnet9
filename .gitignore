@@ -1,0 +1,136 @@
+
+# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/.idea.gerenciador de arquivos.iml
+/projectSettingsUpdater.xml
+/modules.xml
+/contentModel.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+# Ignored default folder with query files
+/queries/
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+
+
+## ==========================================
+## .NET / C# Build & Output Artifacts
+## ==========================================
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+[Ll]og/
+[Ll]ogs/
+artifacts/
+
+# Visual Studio & MSBuild generated files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.userprefs
+*.launch
+*.pidb
+*.booproj
+*.svclog
+*.generated.*
+
+## ==========================================
+## IDEs and Text Editors
+## ==========================================
+# Visual Studio
+.vs/
+
+# JetBrains Rider & ReSharper
+.idea/
+*.DotSettings.user
+*.DotSettings
+_ReSharper*/
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+## ==========================================
+## NuGet & Dependencies
+## ==========================================
+*.nupkg
+*.snupkg
+*.nuget.props
+*.nuget.targets
+packages/
+project.assets.json
+project.lock.json
+*.nuget.cache
+
+## ==========================================
+## Environment, Secrets & Local Settings
+## ==========================================
+appsettings.*.local.json
+appsettings.Local.json
+*.local.json
+.env
+.env.*
+!.env.example
+secrets.json
+
+## ==========================================
+## Databases & Local Storage
+## ==========================================
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+*.mdf
+*.ldf
+
+## ==========================================
+## Test & Coverage Results
+## ==========================================
+[Tt]est[Rr]esults/
+coverage/
+*.coverage
+*.coveragexml
+
+## ==========================================
+## Publish & Packaging
+## ==========================================
+publish/
+Publish/
+*.pubxml
+*.pubxml.user
+*.publishsettings
+
+## ==========================================
+## Operating System Specific Files
+## ==========================================
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
