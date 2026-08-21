@@ -6,6 +6,7 @@ using Domain.Interface;
 using Domain.Models;
 using infrastruruty.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace infrastruruty.Repositories
 {
@@ -27,8 +28,8 @@ namespace infrastruruty.Repositories
             return user; // retorna o user com a conxao estabelecida
         }
 
-        public async Task<int> DeleteAsync(int id)
-        {
+        public async Task<int> DeleteAsync(int id){
+            
             var user = await UserDbContext.Users.FirstOrDefaultAsync(model => model.UserId == id); // procura o user do bd
 
             if (user is null) // verifica se ele existe
@@ -40,25 +41,32 @@ namespace infrastruruty.Repositories
             return await UserDbContext.SaveChangesAsync(); //salva as alteraçoes no banco de dados
         }
 
-        public Task<User> GetByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<User> GetByIdAsync(int id){
 
-        public async Task<List<User>> GetUsersAsync()
-        {
-            var user = await UserDbContext.Users.ToListAsync(); // retorna toda os user atuais do banco de dados
+            var user = await UserDbContext.Users.AsNoTracking().FirstOrDefaultAsync(model => model.UserId == id);
             return user;
         }
 
-        public Task<List<User>> GetUsersInfosAsync(User user)
-        {
-            throw new NotImplementedException();
+        public async Task<List<User>> GetUsersAsync(){
+            var user = await UserDbContext.Users.ToListAsync(); // retorna toda os user atuais do banco de dados 
+            return user;
         }
 
-        public Task<int> UpdateAsync(int id, User user)
-        {
-            throw new NotImplementedException();
+        public async Task<List<User>> GetUsersInfosAsync(){
+            var users = await UserDbContext.Users.AsNoTracking().ToListAsync(); // retorna a lista de todos os user infos
+            return users;
+        }
+
+        public async Task<int> UpdateUserAsync(int id, User user){ // atualiza as inforções do usuario
+
+            var use =  await UserDbContext.Users.Where(model => model.UserId == id).ExecuteUpdateAsync(setting => setting
+            .SetProperty(use => use.UserId, user.UserId)
+            .SetProperty(use => use.UserName, user.UserName)
+            .SetProperty(use => use.Passwolrd, user.Passwolrd)
+            );
+            
+            return use;
+        }
+
         }
     }
-}
