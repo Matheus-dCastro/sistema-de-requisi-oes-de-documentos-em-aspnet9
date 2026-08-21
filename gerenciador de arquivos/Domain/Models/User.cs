@@ -1,6 +1,9 @@
 ﻿namespace Domain.Models;
 
-public class Blog
+public class User
 {
-    public int BlogId { get; set; }
+    public int UserId { get; set; }
+    public string UserName {get; set;}
+    public string Passwolrd {get; set;}
+
 }
