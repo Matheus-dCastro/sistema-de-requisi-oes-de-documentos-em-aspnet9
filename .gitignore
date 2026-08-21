@@ -25,6 +25,19 @@
 [Ll]og/
 [Ll]ogs/
 artifacts/
+**/[Bb]in/
+**/[Oo]bj/
+
+# Assembly & Generated Files
+*.AssemblyInfo.cs
+*.AssemblyInfoInputs.cache
+*.AssemblyAttributes.cs
+*AssemblyInfo*
+*AssemblyAttributes*
+.assemble
+.assemble/
+*.assemble
+*.assemble/
 
 # Visual Studio & MSBuild generated files
 *.suo
