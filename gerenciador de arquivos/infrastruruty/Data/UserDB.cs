@@ -11,6 +11,6 @@ namespace infrastruruty.Data
     {
         public UserDB(DbContextOptions<DbContext> dbContextOptions) : base(dbContextOptions) // assim a ref pode herdar todas as propriedades e consegue fazer tanto acesso de leitura e escrita para o banco
         {}
-        public DbSet<User> GetUsers{get; set;}
+        public DbSet<User> Users{get; set;}
     }
 }
