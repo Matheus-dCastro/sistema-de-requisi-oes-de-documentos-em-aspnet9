@@ -4,20 +4,40 @@ using System.Linq;
 using System.Threading.Tasks;
 using Domain.Interface;
 using Domain.Models;
+using infrastruruty.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace infrastruruty.Repositories
 {
     public class UserRepositorie : UserRepository // aqui eu defino como as coisas vao acontecer no banco de dados para o modelo user
 
     {
-        public Task<User> CreateAsync(User user)
-        {
-            throw new NotImplementedException();
+
+        public UserRepositorie(UserDB userDbContext){
+            UserDbContext = userDbContext;
         }
 
-        public Task<bool> DeleteAsync(int id)
+        public UserDB UserDbContext { get; }
+
+        public async Task<User> CreateAsync(User user) // cria a conexao com o banco
         {
-            throw new NotImplementedException();
+            await UserDbContext.Users.AddAsync(user); // estabelece a conexao
+            await UserDbContext.SaveChangesAsync(); // salva a conexa da sessao com o user 
+
+            return user; // retorna o user com a conxao estabelecida
+        }
+
+        public async Task<int> DeleteAsync(int id)
+        {
+            var user = await UserDbContext.Users.FirstOrDefaultAsync(model => model.UserId == id); // procura o user do bd
+
+            if (user is null) // verifica se ele existe
+            {
+                return 0;
+            }
+
+            UserDbContext.Users.Remove(user);
+            return await UserDbContext.SaveChangesAsync(); //salva as alteraçoes no banco de dados
         }
 
         public Task<User> GetByIdAsync(int id)
@@ -25,9 +45,10 @@ namespace infrastruruty.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<List<User>> GetUsersAsync()
+        public async Task<List<User>> GetUsersAsync()
         {
-            throw new NotImplementedException();
+            var user = await UserDbContext.Users.ToListAsync(); // retorna toda os user atuais do banco de dados
+            return user;
         }
 
         public Task<List<User>> GetUsersInfosAsync(User user)
@@ -35,7 +56,7 @@ namespace infrastruruty.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<bool> UpdateAsync(int id, User user)
+        public Task<int> UpdateAsync(int id, User user)
         {
             throw new NotImplementedException();
         }
