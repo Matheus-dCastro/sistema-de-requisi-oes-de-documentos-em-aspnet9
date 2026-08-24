@@ -4,7 +4,8 @@ using infrastruruty.Data;
 using infrastruruty.Repositories;                                                                                                                      
 using Microsoft.EntityFrameworkCore;                                                                                                                   
 using Microsoft.Extensions.Configuration;                                                                                                              
-using Microsoft.Extensions.DependencyInjection;               
+using Microsoft.Extensions.DependencyInjection;    
+           
 
 namespace infrastruruty
 {
@@ -18,6 +19,7 @@ namespace infrastruruty
                 b => b.MigrationsAssembly(typeof(UserDB).Assembly.FullName));
             });
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
 
             return services;
         }

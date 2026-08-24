@@ -6,6 +6,8 @@ using Aplication.DTOs.User;
 using Aplication.Interfaces;
 using Domain.Interface;
 using Domain.Models;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Aplication.Service
 {
@@ -32,24 +34,43 @@ namespace Aplication.Service
             };
         }
 
-        public Task<int> DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var DeleteAsync = await _UserReporitory.DeleteAsync(id);
+            return DeleteAsync>0;
         }
 
-        public Task<UserGetDTO> GetByIdAsync(int id)
+        public async Task<UserGetDTO> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var user = await _UserReporitory.GetByIdAsync(id);
+            return new UserGetDTO
+            {
+              UserName = user.UserName,
+              UserId = user.UserId  
+            };
+        }
+        public async Task<List<UserGetDTO>> GetUsersAsync()
+        {
+            var users = await _UserReporitory.GetUsersAsync();
+            return users.Select( u => new UserGetDTO
+             {                                                                                                                                              
+                UserId = u.UserId,                                                                                                                         
+                UserName = u.UserName                                                                                                                      
+            }).ToList();   
         }
 
-        public Task<List<UserGetDTO>> GetUsersAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<int> UpdateUserAsync(int id, UserPostDTO user)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<bool> UpdateUserAsync(int id, UserPostDTO userDto)                                                                                   
+        {                                                                                                                                                      
+            using var hmac = new HMACSHA512();                                                                                                                 
+            var user = new User                                                                                                                                
+            {                                                                                                                                                  
+                UserName = userDto.UserName,                                                                                                                   
+                PasswordSalt = hmac.Key,                                                                                                                       
+                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(userDto.Password))                                                                      
+            };                                                                                                                                                 
+                                                                                                                                                            
+            var affectedRows = await _UserReporitory.UpdateUserAsync(id, user);
+            return affectedRows > 0;                                                                                                                           
+        }                                
     }
 }
