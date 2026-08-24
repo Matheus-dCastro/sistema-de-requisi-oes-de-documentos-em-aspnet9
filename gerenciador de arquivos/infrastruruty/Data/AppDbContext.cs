@@ -1,23 +1,21 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using Domain.Models;
-using infrastruruty.Data;
+using Microsoft.EntityFrameworkCore;
 
-namespace infrastruruty;
+namespace infrastruruty.Data;
+
 public class AppDbContext : DbContext
 {
-    public AppDbContext(DbContextOptions<AppDbContext> dbContextOptions) : base(dbContextOptions)
-{}
-public DbSet<User> Users { get; set; }
-public DbSet<Document> Documents { get; set; }
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+    {
+    }
 
-protected override void OnModelCreating(ModelBuilder modelBuilder)
-{
-    base.OnModelCreating(modelBuilder);
-    Configurations.Configure(modelBuilder);
-}
+    public DbSet<User> Users { get; set; }
+    public DbSet<Document> Documents { get; set; }
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+        // Aplica todas as configurações de User e Document automaticamente
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
+    }
 }

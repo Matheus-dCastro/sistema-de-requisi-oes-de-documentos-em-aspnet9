@@ -1,30 +1,21 @@
-using Microsoft.EntityFrameworkCore;
 using Domain.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace infrastruruty.Data;
 
-public class Configurations
+public class DocumentConfiguration : IEntityTypeConfiguration<Document>
 {
-    public static void Configure(ModelBuilder modelBuilder)
+    public void Configure(EntityTypeBuilder<Document> builder)
     {
-        modelBuilder.Entity<User>(entity =>
-            {
-                entity.HasKey(e => e.UserId);
-                entity.Property(e => e.UserName).IsRequired();
-                entity.Property(e => e.Passwolrd).IsRequired();
-            });
+        builder.HasKey(d => d.DocumentId);
+        builder.Property(d => d.Title).IsRequired();
+        builder.Property(d => d.DocumentType).IsRequired();
+        builder.Property(d => d.UserId).IsRequired();
 
-            modelBuilder.Entity<Document>(entity =>
-            {
-                entity.HasKey(e => e.DocumentId);
-                entity.Property(e => e.Title).IsRequired();
-                entity.Property(e => e.DocumentType).IsRequired();
-                entity.Property(e => e.UserId).IsRequired();
-
-                entity.HasOne(d => d.User)
-                      .WithMany()
-                      .HasForeignKey(d => d.UserId)
-                      .OnDelete(DeleteBehavior.Cascade);
-            });
-        }
+        builder.HasOne(d => d.User)
+              .WithMany()
+              .HasForeignKey(d => d.UserId)
+              .OnDelete(DeleteBehavior.Cascade);
     }
+}
