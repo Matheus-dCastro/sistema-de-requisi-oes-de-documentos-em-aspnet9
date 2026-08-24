@@ -14,11 +14,11 @@ namespace infrastruruty.Repositories
 
     {
 
-        public UserRepositorie(UserDB userDbContext){
+        public UserRepositorie(AppDbContext userDbContext){
             UserDbContext = userDbContext;
         }
 
-        public UserDB UserDbContext { get; }
+        public AppDbContext UserDbContext { get; }
 
         public async Task<User> CreateAsync(User user) // cria a conexao com o banco
         {
