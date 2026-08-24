@@ -1,16 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
-using System.Threading.Tasks;
-using Aplication.Services;
-using Domain.Interface;
-using infrastruruty.Data;
-using infrastruruty.Repositories;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
+using Aplication.Services;                                                                                                                             
+using Domain.Interface;                                                                                                                                
+using infrastruruty.Data;                                                                                                                              
+using infrastruruty.Repositories;                                                                                                                      
+using Microsoft.EntityFrameworkCore;                                                                                                                   
+using Microsoft.Extensions.Configuration;                                                                                                              
+using Microsoft.Extensions.DependencyInjection;               
 
 namespace infrastruruty
 {
@@ -20,7 +14,7 @@ namespace infrastruruty
         {
             services.AddDbContext<UserDB>(Options =>
             {
-                Options.UseNpgsql(configuration.GetConnectionString("DefaltConection"),
+                Options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
                 b => b.MigrationsAssembly(typeof(UserDB).Assembly.FullName));
             });
             services.AddScoped<IUserRepository, UserRepository>();
