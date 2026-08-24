@@ -23,6 +23,7 @@ namespace infrastruruty
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IDocumentrepository, DocumentRepository>();
+            services.AddScoped<IHash, UserService>();
             return services;
         }
     }

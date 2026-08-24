@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using infrastruruty.Data;
 
@@ -11,9 +12,11 @@ using infrastruruty.Data;
 namespace infrastruruty.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class UserDBModelSnapshot : ModelSnapshot
+    [Migration("20260824172445_AdicionandoTabelaDocumentos")]
+    partial class AdicionandoTabelaDocumentos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
