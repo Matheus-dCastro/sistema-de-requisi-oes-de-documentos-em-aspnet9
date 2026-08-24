@@ -8,8 +8,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddControllers();
 builder.Services.AddInfrastructure(builder.Configuration);
 
-
-
+//soeb a versao mais atual do projeto para a main
 
 var app = builder.Build();
 
