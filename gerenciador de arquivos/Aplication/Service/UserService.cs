@@ -44,9 +44,11 @@ namespace Aplication.Service
             return DeleteAsync>0;
         }
 
-        public async Task<UserGetDTO> GetByIdAsync(int id)
+        public async Task<UserGetDTO?> GetByIdAsync(int id)
         {
             var user = await _UserReporitory.GetByIdAsync(id);
+            if (user is null) return null;
+
             return new UserGetDTO
             {
               UserName = user.UserName,
