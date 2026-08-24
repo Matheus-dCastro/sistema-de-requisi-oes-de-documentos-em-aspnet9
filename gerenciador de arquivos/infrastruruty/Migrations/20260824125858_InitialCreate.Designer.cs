@@ -10,7 +10,7 @@ using infrastruruty.Data;
 
 namespace infrastruruty.Migrations
 {
-    [DbContext(typeof(UserDB))]
+    [DbContext(typeof(AppDbContext))]
     [Migration("20260824125858_InitialCreate")]
     partial class InitialCreate
     {

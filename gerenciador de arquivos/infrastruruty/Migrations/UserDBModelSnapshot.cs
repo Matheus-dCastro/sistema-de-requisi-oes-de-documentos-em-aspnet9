@@ -9,7 +9,7 @@ using infrastruruty.Data;
 
 namespace infrastruruty.Migrations
 {
-    [DbContext(typeof(UserDB))]
+    [DbContext(typeof(AppDbContext))]
     partial class UserDBModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
