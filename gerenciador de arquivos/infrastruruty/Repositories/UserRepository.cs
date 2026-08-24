@@ -61,7 +61,9 @@ public class UserRepository : IUserRepository
             .Where(u => u.UserId == id)
             .ExecuteUpdateAsync(setter => setter
                 .SetProperty(u => u.UserName, user.UserName)
-                .SetProperty(u => u.Password, user.Password)
+                .SetProperty(u => u.PasswordHash, user.PasswordHash)
+                .SetProperty(u => u.PasswordSalt, user.PasswordSalt)
+
             );
 
         return affectedRows;

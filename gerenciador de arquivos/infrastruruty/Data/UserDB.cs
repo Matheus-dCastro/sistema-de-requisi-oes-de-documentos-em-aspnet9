@@ -14,5 +14,10 @@ public class UserDB : DbContext
     }
 
     // Mapeamento da tabela de Usuários
-    public DbSet<User> Users { get; set; }
-}
+    public DbSet<User> Users { get; set; } // Cria as entidades dentro do banco de dados
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(UserDB).Assembly);
+    }
+}
