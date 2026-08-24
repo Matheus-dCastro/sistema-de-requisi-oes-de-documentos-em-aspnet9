@@ -25,7 +25,16 @@ namespace Aplication.Service
             var CreateUser = new User
             {
                 UserName = userPostDTO.UserName,
+                
             };
+             using var hmac = new HMACSHA512();                                                                                                                     
+            var user = new User                                                                                                                                    
+            {                                                                                                                                                      
+                UserName = userPostDTO.UserName,                                                                                                                   
+                PasswordSalt = hmac.Key,                                                                                                                           
+                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(userPostDTO.Password))                                                                      
+            };                                                                                                                                                     
+                                    
             var createdUser = await _UserReporitory.CreateAsync(CreateUser); 
             return new UserGetDTO
             {
