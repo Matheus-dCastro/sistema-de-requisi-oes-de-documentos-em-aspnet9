@@ -11,7 +11,7 @@ using System.Text;
 
 namespace Aplication.Service
 {
-    public class UserService : IUserService
+    public class UserService : IUserService, IHash
     {
         private readonly IUserRepository _UserReporitory;
 
@@ -78,5 +78,22 @@ namespace Aplication.Service
             var affectedRows = await _UserReporitory.UpdateUserAsync(id, user);
             return affectedRows > 0;                                                                                                                           
         }                                
+    
+
+    public string HashPassword(string password, byte[] salt)
+    {
+        using var hmac = new HMACSHA512(salt);
+        var hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+        return Convert.ToBase64String(hash);
+    }   
+
+    public async Task<bool> VerifyPasswordAsync(string password, byte[] salt, byte[] hash)
+    {
+        using var hmac = new HMACSHA512(salt);
+        var computedHash = await Task.Run(() => hmac.ComputeHash(Encoding.UTF8.GetBytes(password)));
+        return computedHash.SequenceEqual(hash);
+    }      
+
+
     }
 }

@@ -13,5 +13,7 @@ namespace Aplication.Interfaces
         Task<UserGetDTO> CreateAsync(UserPostDTO user);
         Task<bool> UpdateUserAsync(int id, UserPostDTO user);
         Task<bool> DeleteAsync(int id);
+
+        Task<bool> VerifyPasswordAsync(string password, byte[] salt, byte[] hash);
     }
 }
