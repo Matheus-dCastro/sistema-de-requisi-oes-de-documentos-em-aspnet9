@@ -63,7 +63,6 @@ public class UserRepository : IUserRepository
                 .SetProperty(u => u.UserName, user.UserName)
                 .SetProperty(u => u.PasswordHash, user.PasswordHash)
                 .SetProperty(u => u.PasswordSalt, user.PasswordSalt)
-
             );
 
         return affectedRows;
