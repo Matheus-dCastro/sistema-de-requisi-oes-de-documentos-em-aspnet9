@@ -1,10 +1,10 @@
-using Aplication.Services; 
-// using Aplication.Interfaces;                                                                                                                             
-using Domain.Interface;                                                                                                                                
-using infrastruruty.Data;                                                                                                                              
-using infrastruruty.Repositories;                                                                                                                      
-using Microsoft.EntityFrameworkCore;                                                                                                                   
-using Microsoft.Extensions.Configuration;                                                                                                              
+using Aplication.Interfaces;
+using Aplication.Service;
+using Domain.Interface;
+using infrastruruty.Data;
+using infrastruruty.Repositories;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;   
      
            

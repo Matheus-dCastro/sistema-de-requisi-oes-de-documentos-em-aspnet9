@@ -22,20 +22,15 @@ namespace Aplication.Service
 
         public async Task<UserGetDTO> CreateAsync(UserPostDTO userPostDTO)
         {
-            var CreateUser = new User
+            using var hmac = new HMACSHA512();
+            var user = new User
             {
                 UserName = userPostDTO.UserName,
-                
+                PasswordSalt = hmac.Key,
+                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(userPostDTO.Password))
             };
-             using var hmac = new HMACSHA512();                                                                                                                     
-            var user = new User                                                                                                                                    
-            {                                                                                                                                                      
-                UserName = userPostDTO.UserName,                                                                                                                   
-                PasswordSalt = hmac.Key,                                                                                                                           
-                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(userPostDTO.Password))                                                                      
-            };                                                                                                                                                     
-                                    
-            var createdUser = await _UserReporitory.CreateAsync(CreateUser); 
+
+            var createdUser = await _UserReporitory.CreateAsync(user);
             return new UserGetDTO
             {
                 UserName = createdUser.UserName,

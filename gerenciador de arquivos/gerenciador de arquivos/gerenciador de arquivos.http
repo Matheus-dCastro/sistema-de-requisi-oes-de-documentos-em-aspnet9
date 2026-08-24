@@ -1,6 +1,10 @@
 @gerenciador_de_arquivos_HostAddress = http://localhost:5128
 
-GET {{gerenciador_de_arquivos_HostAddress}}/weatherforecast/
-Accept: application/json
+### Criar Usuário
+POST {{gerenciador_de_arquivos_HostAddress}}/api/User
+Content-Type: application/json
 
-###
+{
+  "userName": "usuarioTeste",
+  "password": "senhaForte123"
+}
